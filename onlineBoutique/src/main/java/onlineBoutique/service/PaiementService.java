@@ -6,6 +6,7 @@
 package onlineBoutique.service;
 
 import onlineBoutique.entity.Commande;
+import onlineBoutique.entity.SousComande;
 import onlineBoutique.exeption.CommandeNulleException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,17 +21,26 @@ public class PaiementService {
     @Autowired
     private ArticleService articleService;
 
-    public void payer(Commande c) throws CommandeNulleException {
+    @Autowired
+    private CommandeService  commandeService;
+    
+    public void payer(long id) throws CommandeNulleException {
 
+        Commande c =  commandeService.findOne(id);
+        
         if (c.getSousCommandes().isEmpty()) 
         {
             throw new CommandeNulleException("Votre panier est vide");
         } 
         else 
         {
+            //Paiement
+            c.setCommandePaye(Boolean.TRUE);
+            
             //Gestion de stock
-            for(int i=0; i<=c.getSousCommandes().size();i++)
+            for(SousComande sousComande : c.getSousCommandes())
             {
+//                sousComande.getArticle().getStock()
 //                articleService.findByArticleOrderBynom(c.getSousCommandes);
             }
             System.out.println("Votre paiement à été bien effectué");
