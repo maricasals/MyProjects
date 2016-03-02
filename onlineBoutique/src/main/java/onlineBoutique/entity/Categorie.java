@@ -26,7 +26,9 @@ public class Categorie implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @OneToMany(mappedBy = "categorieArticle")
+    private String nom;
+    
+    @OneToMany(mappedBy = "categorie")
     private List<Article> articles = new ArrayList<>();
 
     public Long getId() {
@@ -61,5 +63,30 @@ public class Categorie implements Serializable {
     public String toString() {
         return "onlineBoutique.entity.Categorie[ id=" + id + " ]";
     }
+
+    public Categorie() {
+    }
+
+    public Categorie(String nom) {
+        this.nom = nom;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+    
+    public List<Article> getArticles() {
+        return articles;
+    }
+
+    public void setArticles(List<Article> articles) {
+        this.articles = articles;
+    }
+    
+    
     
 }

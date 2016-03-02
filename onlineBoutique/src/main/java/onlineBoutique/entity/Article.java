@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,17 +31,21 @@ public class Article implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @Column(length = 32)
+    @Column(length = 128)
     private String nom;
+    
     private Long stock;
     private Long prix;
     
+    @Enumerated(EnumType.STRING)
+    private Genre genre;
+    
     @ManyToOne
-    @JoinColumn(name = "CATEGORIES")
-    private Categorie categorieArticle;
+    @JoinColumn(name = "CATEGORIES_ID")
+    private Categorie categorie;
     
     @OneToMany(mappedBy = "article")
-    private List<SousComande> souscomandes = new ArrayList<>();
+    private List<SousComande> sousComandes = new ArrayList<>();
     
 
     public Long getId() {
@@ -74,5 +80,56 @@ public class Article implements Serializable {
     public String toString() {
         return "onlineBoutique.entity.Article[ id=" + id + " ]";
     }
+
+    public Article() {
+    }
+
+    public Article(String nom, Long stock, Long prix, Categorie categorieArticle) {
+        this.nom = nom;
+        this.stock = stock;
+        this.prix = prix;
+        this.categorie = categorieArticle;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public Long getStock() {
+        return stock;
+    }
+
+    public void setStock(Long stock) {
+        this.stock = stock;
+    }
+
+    public Long getPrix() {
+        return prix;
+    }
+
+    public void setPrix(Long prix) {
+        this.prix = prix;
+    }
+
+    public Categorie getCategorieArticle() {
+        return categorie;
+    }
+
+    public void setCategorieArticle(Categorie categorieArticle) {
+        this.categorie = categorieArticle;
+    }
+
+    public List<SousComande> getSouscomandes() {
+        return sousComandes;
+    }
+
+    public void setSouscomandes(List<SousComande> souscomandes) {
+        this.sousComandes = souscomandes;
+    }
+    
     
 }

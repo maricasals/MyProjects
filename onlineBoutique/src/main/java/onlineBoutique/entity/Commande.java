@@ -13,11 +13,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
-import static onlineBoutique.entity.SousComande_.commande;
 
 /**
  *
@@ -35,17 +33,18 @@ public class Commande implements Serializable {
     private Date dateCommande;
     private Long prisTotale;
     private Boolean commandePaye;
+    private Boolean livre;
     
     @OneToMany(mappedBy = "commande")
     private List<SousComande> sousCommandes;
     
     @ManyToOne
-    @JoinColumn(name = "UTILISATEUR")
+    @JoinColumn(name = "UTILISATEUR_ID")
     private Utilisateur utilisateur;
     
     @ManyToOne
-    @JoinColumn(name = "MODE_LIVRAISON")
-    private ModeLivraison modelivraison;
+    @JoinColumn(name = "MODE_LIVRAISON_ID")
+    private ModeLivraison modeLivraison;
 
     public Long getId() {
         return id;
@@ -79,5 +78,62 @@ public class Commande implements Serializable {
     public String toString() {
         return "onlineBoutique.entity.Commande[ id=" + id + " ]";
     }
+
+    public Date getDateCommande() {
+        return dateCommande;
+    }
+
+    public void setDateCommande(Date dateCommande) {
+        this.dateCommande = dateCommande;
+    }
+
+    public Long getPrisTotale() {
+        return prisTotale;
+    }
+
+    public void setPrisTotale(Long prisTotale) {
+        this.prisTotale = prisTotale;
+    }
+
+    public Boolean getCommandePaye() {
+        return commandePaye;
+    }
+
+    public void setCommandePaye(Boolean commandePaye) {
+        this.commandePaye = commandePaye;
+    }
+
+    public Boolean getLivre() {
+        return livre;
+    }
+
+    public void setLivre(Boolean livre) {
+        this.livre = livre;
+    }
+
+    public List<SousComande> getSousCommandes() {
+        return sousCommandes;
+    }
+
+    public void setSousCommandes(List<SousComande> sousCommandes) {
+        this.sousCommandes = sousCommandes;
+    }
+
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
+    }
+
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
+    }
+
+    public ModeLivraison getModeLivraison() {
+        return modeLivraison;
+    }
+
+    public void setModeLivraison(ModeLivraison modeLivraison) {
+        this.modeLivraison = modeLivraison;
+    }
+    
     
 }

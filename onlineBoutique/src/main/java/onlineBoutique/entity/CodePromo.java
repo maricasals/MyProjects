@@ -8,6 +8,8 @@ package onlineBoutique.entity;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +27,9 @@ public class CodePromo implements Serializable {
     private Long id;
     
     @Column(length = 32)
-    private String codePromo;
+    private String nom;
+    
+    @Enumerated(EnumType.STRING)
     private TypeCodePromo typeCodePromo;
 
     public Long getId() {
@@ -60,5 +64,25 @@ public class CodePromo implements Serializable {
     public String toString() {
         return "onlineBoutique.entity.CodePromo[ id=" + id + " ]";
     }
+
+    public CodePromo() {
+    }
+
+    public String getCodePromo() {
+        return nom;
+    }
+
+    public void setCodePromo(String codePromo) {
+        this.nom = codePromo;
+    }
+
+    public TypeCodePromo getTypeCodePromo() {
+        return typeCodePromo;
+    }
+
+    public void setTypeCodePromo(TypeCodePromo typeCodePromo) {
+        this.typeCodePromo = typeCodePromo;
+    }
+    
     
 }

@@ -28,11 +28,11 @@ public class SousComande implements Serializable {
     private Long quantite;
     
     @ManyToOne
-    @JoinColumn(name = "ARTICLES")
+    @JoinColumn(name = "ARTICLE_ID")
     private Article article;
     
     @ManyToOne
-    @JoinColumn(name = "COMMANDE")
+    @JoinColumn(name = "COMMANDE_ID")
     private Commande commande;
 
     public Long getId() {
@@ -67,5 +67,31 @@ public class SousComande implements Serializable {
     public String toString() {
         return "onlineBoutique.entity.SousComande[ id=" + id + " ]";
     }
+
+    public Long getQuantite() {
+        return quantite;
+    }
+
+    public void setQuantite(Long quantite) {
+        this.quantite = quantite;
+    }
+
+    public Article getArticle() {
+        return article;
+    }
+
+    public void setArticle(Article article) {
+        this.article = article;
+    }
+
+    public Commande getCommande() {
+        return commande;
+    }
+
+    public void setCommande(Commande commande) {
+        this.commande = commande;
+    }
+    
+    
     
 }
